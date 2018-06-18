@@ -12,7 +12,7 @@ def read(fname):
 
 data = {
     'name': 'djradicale',
-    'version': '0.0.14',
+    'version': '0.0.15',
     'author': 'Kyoken',
     'author_email': 'kyoken@kyoken.ninja',
     'description': (
@@ -36,9 +36,11 @@ data = {
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: GNU General Public License v3 or later (GPLv3+)',
         'Framework :: Django',
+        'Framework :: Django :: 1.11',
+        'Framework :: Django :: 2.0',
     ],
     'install_requires': [
-        'Django >= 2.0',
+        'Django >= 1.11',
         'Radicale == 1.1.1',
     ],
 }
