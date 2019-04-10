@@ -13,6 +13,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA.
+import logging
+
+import io
 
 import base64
 import copy
@@ -54,8 +57,7 @@ class DjRadicaleView(Application, View):
         super(DjRadicaleView, self).__init__()
         super(View, self).__init__(**kwargs)
 
-    def do_HEAD(self, environ, read_collections, write_collections, content,
-                user):
+    def do_HEAD(self, environ, read_collections, write_collections, content, user):
         """Manage HEAD request."""
         status, headers, answer = self.do_GET(
             environ, read_collections, write_collections, content, user)
@@ -66,9 +68,16 @@ class DjRadicaleView(Application, View):
         if not request.method.lower() in self.http_method_names:
             return self.http_method_not_allowed(request, *args, **kwargs)
         response = ApplicationResponse()
-        answer = self(request.META, response.start_response)
+
+        # add wsgi.input to radicale environ in case wsgi is not used
+        environ = request.META
+        if 'wsgi.input' not in environ:
+            environ['wsgi.input'] = io.BytesIO(request.body)
+
+        answer = self(environ, response.start_response)
         for i in answer:
             response.write(i)
+
         return response
 
 
