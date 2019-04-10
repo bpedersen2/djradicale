@@ -12,7 +12,7 @@ def read(fname):
 
 data = {
     'name': 'djradicale',
-    'version': '0.0.15',
+    'version': '0.0.16-bha',
     'author': 'Kyoken',
     'author_email': 'kyoken@kyoken.ninja',
     'description': (
@@ -41,7 +41,7 @@ data = {
     ],
     'install_requires': [
         'Django >= 1.11',
-        'Radicale == 1.1.1',
+        'Radicale >= 1.1.6,<2',
     ],
 }
 
