@@ -22,8 +22,8 @@ Requirements
 ============
 
 * Python >= 3.0
-* Django >= 2.0
-* Radicale == 1.1.1
+* Django >= 1.11
+* Radicale >= 1.1.6, <2
 
 
 Installation
